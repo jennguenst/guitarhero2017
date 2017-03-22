@@ -47,14 +47,14 @@ public class RingBuffer{
         return false;
       }
   }
-  public void enqueue(double x){
+  public void enqueue(double x) throws Exception{
     if(tail == capacityActual){
       tail = 0;
       enqueue(x);
     }
     else if(isFull()){
         if(head != tail){
-            System.out.println("ERROR");
+            throw new Exception("ERROR! CANNOT ENQUEUE WHEN FULL!");
 
 
         }
@@ -75,9 +75,9 @@ public class RingBuffer{
     }
   }
 
-  public double dequeue(){   //returns and deletes first item
+  public double dequeue()throws Exception{   //returns and deletes first item
     if(isEmpty()){
-        System.out.println("ERROR");
+        throw new Exception("ERROR! CANNOT DEQUEUE WHEN EMPTY!");
 
 
     }
@@ -93,13 +93,17 @@ public class RingBuffer{
     return value;
 
   }
-  public double peek(){     //returns but doesnt delete first item in array
+  public double peek() throws Exception{     //returns but doesnt delete first item in array
     if(isEmpty()){
-        System.out.println("ERROR");
+        throw new Exception("ERROR! CANNOT PEEK WHEN EMPTY!");
 
 
     }
-    return buffer[head];
+    else{
+      return buffer[head];
+
+    }
+
 
 
 }
